@@ -12,7 +12,7 @@ public class HelloController {
 
     @GetMapping("/hello-world")
     public String sayHello() {
-        return "hello_world";
+        return "hello_world"; // строка - это название предствления (view)
     }
 }
 
