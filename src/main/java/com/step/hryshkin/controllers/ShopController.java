@@ -12,16 +12,10 @@ import com.step.hryshkin.utils.UtilsForOnlineShop;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 
 import javax.inject.Inject;
-import javax.servlet.RequestDispatcher;
-import javax.servlet.ServletException;
 import javax.servlet.ServletRequest;
-import javax.servlet.ServletResponse;
 import javax.servlet.http.HttpServletRequest;
-import java.io.IOException;
 import java.math.BigDecimal;
 import java.util.Optional;
 
@@ -31,7 +25,6 @@ import java.util.Optional;
 
 @Controller
 public class ShopController {
-    private static final Logger LOGGER = LogManager.getLogger(ShopController.class);
     @Inject
     GoodService goodService;
     @Inject
@@ -45,7 +38,7 @@ public class ShopController {
     public String loginPage(Model model, ServletRequest servletRequest) {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         checkUser((HttpServletRequest) servletRequest);
-        // TODO добавить чекфлаг. Переписать связанный метод
+        if (!checkFlag(request)) return "errors/403";
         checkForNewOrder((HttpServletRequest) servletRequest);
         model.addAttribute("user", ((User) request
                 .getSession()
@@ -115,22 +108,12 @@ public class ShopController {
         }
     }
 
-    // TODO переписать!
-    private void checkFlag(ServletResponse servletResponse, HttpServletRequest request) {
+    private boolean checkFlag(HttpServletRequest request) {
         if (request.getSession().getAttribute("check") == null) {
             if (request.getParameter("check") != null) {
                 UtilsForOnlineShop.setCheckStatus(request, request.getParameter("check"));
-            } else {
-                String path = "/terms_of_use_error.jsp";
-                RequestDispatcher requestDispatcher = request.getRequestDispatcher(path);
-                try {
-                    requestDispatcher.forward(request, servletResponse);
-                } catch (ServletException exception) {
-                    LOGGER.error("ServletException in checkFlag " + exception);
-                } catch (IOException exception) {
-                    LOGGER.error("IOException in checkFlag " + exception);
-                }
-            }
-        }
+                return true;
+            } else return false;
+        } else return true;
     }
 }

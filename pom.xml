@@ -15,11 +15,14 @@
         <!-- Maven dependency versions-->
         <h2_version>1.4.200</h2_version>
         <javax.servlet-api_version>4.0.1</javax.servlet-api_version>
+        <javax.inject_version>1</javax.inject_version>
         <junit_version>4.13.2</junit_version>
         <log4j-api_version>2.14.1</log4j-api_version>
         <log4j-core_version>2.14.1</log4j-core_version>
+        <slf4j-nop_version>1.7.36</slf4j-nop_version>
         <thymeleaf-spring5_version>3.0.15.RELEASE</thymeleaf-spring5_version>
         <validation-api_version>2.0.1.Final</validation-api_version>
+
         <!-- Maven plugins versions-->
         <jetty-maven-plugin_version>10.0.4</jetty-maven-plugin_version>
         <maven-clean-plugin_version>3.1.0</maven-clean-plugin_version>
@@ -35,6 +38,12 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!-- <parent>
+         <groupId>org.springframework.boot</groupId>
+         <artifactId>spring-boot-starter-parent</artifactId>
+         <version>2.1.1.RELEASE</version>
+     </parent> -->
+
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -47,7 +56,13 @@
         </dependencies>
     </dependencyManagement>
 
+
     <dependencies>
+        <!--<dependency>
+        <groupId>org.springframework.boot</groupId>
+        <artifactId>spring-boot-starter-web</artifactId>
+        <version>2.7.2</version>
+        </dependency> -->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -72,7 +87,7 @@
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
-            <version>1.7.36</version>
+            <version>${slf4j-nop_version}</version>
         </dependency>
         <dependency>
             <groupId>junit</groupId>
@@ -94,7 +109,7 @@
         <dependency>
             <groupId>javax.inject</groupId>
             <artifactId>javax.inject</artifactId>
-            <version>1</version>
+            <version>${javax.inject_version}</version>
         </dependency>
         <dependency>
             <groupId>com.h2database</groupId>
@@ -154,6 +169,10 @@
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>${jetty-maven-plugin_version}</version>
                 </plugin>
+                <!-- <plugin>
+                    <groupId>org.springframework.boot</groupId>
+                    <artifactId>spring-boot-maven-plugin</artifactId>
+                </plugin> -->
             </plugins>
         </pluginManagement>
     </build>
