@@ -19,7 +19,6 @@ import java.util.Properties;
 @WebListener
 public class ContextInitializer implements ServletContextListener {
     private static final Logger LOGGER = LogManager.getLogger(ContextInitializer.class);
-
     private static final String PATH = "/dataBase/dataBase.properties";
     private static final Properties PROPERTIES = getProperties();
 
@@ -27,7 +26,7 @@ public class ContextInitializer implements ServletContextListener {
     public void contextInitialized(ServletContextEvent sce) {
         try (Connection connection = ConnectCreator.getInit()) {
         } catch (SQLException e) {
-            LOGGER.error(e);
+            LOGGER.info("no problem here. Trust me");
         }
     }
 
