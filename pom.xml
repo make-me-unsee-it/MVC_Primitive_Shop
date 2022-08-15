@@ -20,6 +20,8 @@
         <log4j-api_version>2.14.1</log4j-api_version>
         <log4j-core_version>2.14.1</log4j-core_version>
         <slf4j-nop_version>1.7.36</slf4j-nop_version>
+        <spring-security-web_version>5.7.2</spring-security-web_version>
+        <spring-security-config_version>5.7.2</spring-security-config_version>
         <thymeleaf-spring5_version>3.0.15.RELEASE</thymeleaf-spring5_version>
         <validation-api_version>2.0.1.Final</validation-api_version>
 
@@ -38,12 +40,14 @@
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     </properties>
 
+    <!-- SPRING BOOT -->
     <!-- <parent>
          <groupId>org.springframework.boot</groupId>
          <artifactId>spring-boot-starter-parent</artifactId>
          <version>2.1.1.RELEASE</version>
      </parent> -->
 
+    <!-- SPRING VERSIONS -->
     <dependencyManagement>
         <dependencies>
             <dependency>
@@ -58,11 +62,14 @@
 
 
     <dependencies>
+        <!-- SPRING BOOT -->
         <!--<dependency>
         <groupId>org.springframework.boot</groupId>
         <artifactId>spring-boot-starter-web</artifactId>
         <version>2.7.2</version>
         </dependency> -->
+
+        <!-- SPRING CORE & SPRING MVC-->
         <dependency>
             <groupId>org.springframework</groupId>
             <artifactId>spring-core</artifactId>
@@ -79,22 +86,42 @@
             <groupId>org.springframework</groupId>
             <artifactId>spring-webmvc</artifactId>
         </dependency>
+
+        <!-- SPRING SECURITY -->
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-web</artifactId>
+            <version>${spring-security-web_version}</version>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.security</groupId>
+            <artifactId>spring-security-config</artifactId>
+            <version>${spring-security-config_version}</version>
+        </dependency>
+
+        <!-- THYMELEAF -->
         <dependency>
             <groupId>org.thymeleaf</groupId>
             <artifactId>thymeleaf-spring5</artifactId>
             <version>${thymeleaf-spring5_version}</version>
         </dependency>
+
+        <!-- need to remove warnings at startup -->
         <dependency>
             <groupId>org.slf4j</groupId>
             <artifactId>slf4j-nop</artifactId>
             <version>${slf4j-nop_version}</version>
         </dependency>
+
+        <!-- TESTS -->
         <dependency>
             <groupId>junit</groupId>
             <artifactId>junit</artifactId>
             <version>${junit_version}</version>
             <scope>test</scope>
         </dependency>
+
+        <!-- JAVAX -->
         <dependency>
             <groupId>javax.validation</groupId>
             <artifactId>validation-api</artifactId>
@@ -111,11 +138,15 @@
             <artifactId>javax.inject</artifactId>
             <version>${javax.inject_version}</version>
         </dependency>
+
+        <!-- H2 -->
         <dependency>
             <groupId>com.h2database</groupId>
             <artifactId>h2</artifactId>
             <version>${h2_version}</version>
         </dependency>
+
+        <!-- LOGGER -->
         <dependency>
             <groupId>org.apache.logging.log4j</groupId>
             <artifactId>log4j-core</artifactId>
@@ -128,6 +159,7 @@
         </dependency>
     </dependencies>
 
+    <!-- BUILD - MAVEN WEBAPP STANDARD -->
     <build>
         <finalName>MVCPrimitiveShop</finalName>
         <pluginManagement>
@@ -164,11 +196,15 @@
                     <artifactId>maven-deploy-plugin</artifactId>
                     <version>${maven-deploy-plugin_version}</version>
                 </plugin>
+
+                <!-- JETTY SERVER -->
                 <plugin>
                     <groupId>org.eclipse.jetty</groupId>
                     <artifactId>jetty-maven-plugin</artifactId>
                     <version>${jetty-maven-plugin_version}</version>
                 </plugin>
+
+                <!-- SPRING BOOT -->
                 <!-- <plugin>
                     <groupId>org.springframework.boot</groupId>
                     <artifactId>spring-boot-maven-plugin</artifactId>
