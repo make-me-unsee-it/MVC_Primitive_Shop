@@ -23,7 +23,7 @@ public class MyAppWebInitializer extends AbstractAnnotationConfigDispatcherServl
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
-        super.customizeRegistration(registration);
+        registration.setInitParameter("throwExceptionIfNoHandlerFound", "true");
     }
 
     @Override
