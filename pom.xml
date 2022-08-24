@@ -9,7 +9,7 @@
     <packaging>war</packaging>
 
     <name>MVC_Primitive_Shop Maven Webapp</name>
-    <url>https://github.com/make-me-unsee-it</url>
+    <url>https://github.com/make-me-unsee-it/MVC_Primitive_Shop</url>
 
     <properties>
         <!-- Maven dependency versions-->
@@ -20,8 +20,8 @@
         <log4j-api_version>2.14.1</log4j-api_version>
         <log4j-core_version>2.14.1</log4j-core_version>
         <slf4j-nop_version>1.7.36</slf4j-nop_version>
-        <spring-security-web_version>5.7.2</spring-security-web_version>
-        <spring-security-config_version>5.7.2</spring-security-config_version>
+        <spring-security-web_version>5.3.4.RELEASE</spring-security-web_version>
+        <spring-security-config_version>5.3.4.RELEASE</spring-security-config_version>
         <thymeleaf-spring5_version>3.0.15.RELEASE</thymeleaf-spring5_version>
         <validation-api_version>2.0.1.Final</validation-api_version>
 

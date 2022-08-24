@@ -2,21 +2,26 @@ package com.step.hryshkin.model;
 
 import java.util.Objects;
 
+import static com.step.hryshkin.model.UserRole.ROLE_USER;
+
 public class User {
 
     private Long id;
     private String login;
     private String password;
+    //private UserRole userRole;
 
     public User(Long id, String name, String password) {
         this.id = id;
         this.login = name;
         this.password = password;
+        //this.userRole = ROLE_USER;
     }
 
     public User(String name, String password) {
         this.login = name;
         this.password = password;
+        //this.userRole = ROLE_USER;
     }
 
     public Long getId() {
@@ -48,8 +53,7 @@ public class User {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id)
-                && Objects.equals(login, user.login) && Objects.equals(password, user.password);
+        return Objects.equals(id, user.id) && Objects.equals(login, user.login) && Objects.equals(password, user.password);
     }
 
     @Override
