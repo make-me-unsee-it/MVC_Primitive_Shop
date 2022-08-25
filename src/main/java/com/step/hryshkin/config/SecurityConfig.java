@@ -25,24 +25,24 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 //TODO убрать комменты. Этот блок устанавливает страницы с открытым доступом для всех
                 .authorizeRequests()
-                .antMatchers("/login")
+                .antMatchers("/login", "/new", "h2/*")
                 .permitAll()
 
                 .and()
                 .authorizeRequests()
-                .antMatchers("/shop/**")
-                .hasRole("USER")
+                //.antMatchers("/shop")
+                //.hasRole("USER")
                 .anyRequest()
                 .authenticated()
 
                 .and()
                 .formLogin()
-                .loginPage("/login")
-                .loginProcessingUrl("/login")
-                .failureUrl("/404")
+                //.loginPage("/login")
+                //.loginProcessingUrl("/login")
+                //.failureUrl("/404")
                 .defaultSuccessUrl("/shop")
-                .passwordParameter("password")
-                .usernameParameter("email")
+                //.passwordParameter("password")
+                //.usernameParameter("email")
                 .permitAll()
                 .and()
 
@@ -50,12 +50,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .logoutSuccessUrl("/login")
                 .logoutUrl("/logout")
                 .invalidateHttpSession(Boolean.TRUE)
-                .permitAll()
-                .and()
-                .sessionManagement()
-                .invalidSessionUrl("/welcome")
-                .maximumSessions(1)
-                .expiredUrl("/welcome");
+                .permitAll();
+                //.and()
+                //.sessionManagement()
+                //.invalidSessionUrl("/welcome")
+                //.maximumSessions(1)
+                //.expiredUrl("/welcome");
     }
 }
 
