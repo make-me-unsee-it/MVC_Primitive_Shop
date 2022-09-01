@@ -9,6 +9,7 @@ import com.step.hryshkin.service.OrderGoodService;
 import com.step.hryshkin.service.OrderService;
 import com.step.hryshkin.service.UserService;
 import com.step.hryshkin.utils.UtilsForOnlineShop;
+import org.springframework.security.access.annotation.Secured;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;

@@ -32,19 +32,19 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
         http.authorizeRequests().antMatchers("/login").permitAll();
         http.authorizeRequests().antMatchers("/new").permitAll();
         http.authorizeRequests().antMatchers("/new_success").permitAll();
-        http.authorizeRequests().antMatchers().permitAll();
-        http.authorizeRequests().antMatchers("/").permitAll();
-        http.authorizeRequests().antMatchers("/403").permitAll();
-        http.authorizeRequests().antMatchers("/404").permitAll();
+        //http.authorizeRequests().antMatchers().permitAll();
+        //http.authorizeRequests().antMatchers("/").permitAll();
+        //http.authorizeRequests().antMatchers("/403").permitAll();
+        //http.authorizeRequests().antMatchers("/404").permitAll();
 
-        //TODO КАМЕНТЫ. Страницы, доступные для пользователй с ролью ЮЗЕР. Проверить!!
+        //TODO КАМЕНТЫ. Страницы, доступные для пользователей! Этот метод нужен!
         //http.authorizeRequests().antMatchers("/super").hasRole("USER")
         //        .anyRequest().authenticated();
 
         //TODO КАМЕНТЫ. НЕ РАБОТАЕТ!
         http
                 .formLogin()
-                .loginPage("/login")
+                //.loginPage("/login")
                 //.loginProcessingUrl("/super")
                 //.failureUrl("/403")
                 .defaultSuccessUrl("/super", true)
