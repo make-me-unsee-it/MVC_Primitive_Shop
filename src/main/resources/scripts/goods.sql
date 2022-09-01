@@ -18,16 +18,16 @@ create table users
 (
     id          int PRIMARY KEY AUTO_INCREMENT,
     userName    VARCHAR(50),
-    password    VARCHAR(50)
+    password    VARCHAR(255)
 );
 insert into users (userName, password)
-values ('Michail', 'qwerty');
+values ('Michail', '$2a$04$EWCL1lLnDbksuAisA7OlMursz4XyycGvtJ/ZVI9NthbkHPkMEJRk.');
 insert into users (userName, password)
-values ('Andrey', '12345');
+values ('Andrey', '$2a$04$INs191JI5GhQN1f54g4dnea0CaA/DDfpqVLfz5eHyr2GoUa/6gL1W');
 insert into users (userName, password)
-values ('Nikolay', 'xcvi12345');
+values ('Nikolay', '$2a$04$whXhhdottMkDd.Mdem2/6.jeEllaeKl8/tv4Mi2pXd536hBZwRfXO');
 insert into users (userName, password)
-values ('Roma', '11111');
+values ('Roma', '$2a$04$wYfN0ckKPzxOBwiMKLUoNe.RFe6iEo9xS0VsyQ36SZzdmvR9p9zc.');
 
 create table orders
 (

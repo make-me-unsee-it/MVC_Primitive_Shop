@@ -34,11 +34,19 @@ public class ShopController {
     @Inject
     UserService userService;
 
+    @GetMapping("/super")
+    public String deleteThisMethod(HttpServletRequest request) {
+        return "shop/super";
+    }
+
     @GetMapping("/shop")
     public String loginPage(Model model, ServletRequest servletRequest) {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
+
         checkUser((HttpServletRequest) servletRequest);
         if (!checkFlag(request)) return "errors/403";
+
+
         checkForNewOrder((HttpServletRequest) servletRequest);
         model.addAttribute("user", ((User) request
                 .getSession()
