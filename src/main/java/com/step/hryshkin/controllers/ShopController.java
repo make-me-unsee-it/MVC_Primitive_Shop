@@ -3,13 +3,13 @@ package com.step.hryshkin.controllers;
 import com.step.hryshkin.model.Good;
 import com.step.hryshkin.model.Order;
 import com.step.hryshkin.model.OrderGood;
-import com.step.hryshkin.model.User;
+import com.step.hryshkin.model.security.CustomUserDetails;
 import com.step.hryshkin.service.GoodService;
 import com.step.hryshkin.service.OrderGoodService;
 import com.step.hryshkin.service.OrderService;
 import com.step.hryshkin.service.UserService;
 import com.step.hryshkin.utils.UtilsForOnlineShop;
-import org.springframework.security.access.annotation.Secured;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,23 +36,17 @@ public class ShopController {
     UserService userService;
 
     @GetMapping("/super")
-    public String deleteThisMethod(HttpServletRequest request) {
+    public String deleteThisMethod(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         return "shop/super";
     }
 
     @GetMapping("/shop")
-    public String loginPage(Model model, ServletRequest servletRequest) {
+    public String loginPage(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                            Model model, ServletRequest servletRequest) {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
 
-        checkUser((HttpServletRequest) servletRequest);
-        if (!checkFlag(request)) return "errors/403";
-
-
-        checkForNewOrder((HttpServletRequest) servletRequest);
-        model.addAttribute("user", ((User) request
-                .getSession()
-                .getAttribute("user"))
-                .getLogin());
+        checkForNewOrder((HttpServletRequest) servletRequest, customUserDetails.getUsername());
+        model.addAttribute("user", customUserDetails.getUsername());
         model.addAttribute("goods", goodService.getAll());
         if (request.getSession().getAttribute("goodListForCurrentOrder") != null) {
             model.addAttribute("currentList", request
@@ -62,29 +56,9 @@ public class ShopController {
         } else return "shop/shop_first";
     }
 
-    private void checkUser(HttpServletRequest request) {
-        String login = request.getParameter("username");
-        String password = request.getParameter("password");
-        User user = new User(login, password);
-        if (login != null) {
-            if (userService.getUserByName(login).isEmpty()) {
-                userService.createNewUser(user);
-            }
-            Optional<User> newUser = userService.getUserByName(login);
-            if (newUser.isPresent()) {
-                if (request.getSession().getAttribute("user") == null) {
-                    UtilsForOnlineShop.setUser(request, newUser.get());
-                } else if (!UtilsForOnlineShop.isUsersEquals(request)) {
-                    request.getSession().invalidate();
-                    UtilsForOnlineShop.setUser(request, newUser.get());
-                }
-            }
-        }
-    }
-
-    private void checkForNewOrder(HttpServletRequest request) {
+    private void checkForNewOrder(HttpServletRequest request, String username) {
         if (request.getParameter("select") != null) {
-            Long userId = ((User) request.getSession().getAttribute("user")).getId();
+            Long userId = userService.getUserByName(username).get().getId();
             long goodId = Long.parseLong(request.getParameter("select"));
             Optional<Good> currentGood = goodService.getById(goodId);
             if (currentGood.isPresent()) {
@@ -117,12 +91,4 @@ public class ShopController {
         }
     }
 
-    private boolean checkFlag(HttpServletRequest request) {
-        if (request.getSession().getAttribute("check") == null) {
-            if (request.getParameter("check") != null) {
-                UtilsForOnlineShop.setCheckStatus(request, request.getParameter("check"));
-                return true;
-            } else return false;
-        } else return true;
-    }
 }

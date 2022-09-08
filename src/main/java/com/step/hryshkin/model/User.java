@@ -13,12 +13,15 @@ public class User {
     public User(Long id, String name, String password) {
         this.id = id;
         this.login = name;
-        this.password = new BCryptPasswordEncoder(4).encode(password);
+        this.password = password;
     }
 
     public User(String name, String password) {
         this.login = name;
-        this.password = new BCryptPasswordEncoder(4).encode(password);
+        this.password = password;
+    }
+
+    public User(){
     }
 
     public Long getId() {

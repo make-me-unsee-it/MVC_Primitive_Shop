@@ -1,4 +1,4 @@
-package com.step.hryshkin.config;
+package com.step.hryshkin.config.springConfig;
 
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;

@@ -10,7 +10,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import java.util.Optional;
 
 /**
  * @author Alekx
@@ -22,15 +21,21 @@ public class IdentificationController {
     @Inject
     UserService userService;
 
+    //TODO ВЫПИЛИТЬ
     @GetMapping("/login")
     public String loginPage(HttpServletRequest request) {
         UtilsForOnlineShop.stopShopping(request);
-        return "identification/login";
+        return "redirect:/login";
     }
 
     @GetMapping()
     public String indexPage() {
-        return "redirect:/login";
+        return "redirect:/homepage";
+    }
+
+    @GetMapping("/homepage")
+    public String homePage() {
+        return "identification/homepage";
     }
 
     @GetMapping("/new")

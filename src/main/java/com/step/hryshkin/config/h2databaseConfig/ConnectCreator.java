@@ -1,4 +1,4 @@
-package com.step.hryshkin.config;
+package com.step.hryshkin.config.h2databaseConfig;
 
 import java.sql.Connection;
 import java.sql.DriverManager;

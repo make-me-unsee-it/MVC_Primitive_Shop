@@ -1,4 +1,4 @@
-package com.step.hryshkin.config;
+package com.step.hryshkin.config.securityConfig;
 
 import org.springframework.security.web.context.AbstractSecurityWebApplicationInitializer;
 

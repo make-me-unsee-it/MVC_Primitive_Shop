@@ -2,7 +2,9 @@ package com.step.hryshkin.controllers;
 
 import com.step.hryshkin.model.Order;
 import com.step.hryshkin.model.User;
+import com.step.hryshkin.model.security.CustomUserDetails;
 import com.step.hryshkin.service.OrderService;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -22,12 +24,10 @@ public class BasketController {
     OrderService orderService;
 
     @GetMapping("/basket")
-    public String basketPage(Model model, ServletRequest servletRequest) {
+    public String basketPage(@AuthenticationPrincipal CustomUserDetails customUserDetails,
+                             Model model, ServletRequest servletRequest) {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
-        model.addAttribute("user", ((User) request
-                .getSession()
-                .getAttribute("user"))
-                .getLogin());
+        model.addAttribute("user", customUserDetails.getUsername());
         model.addAttribute("currentList", request
                 .getSession()
                 .getAttribute("goodListForCurrentOrder"));

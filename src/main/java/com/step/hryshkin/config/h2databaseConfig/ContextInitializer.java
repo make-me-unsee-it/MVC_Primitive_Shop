@@ -1,4 +1,4 @@
-package com.step.hryshkin.config;
+package com.step.hryshkin.config.h2databaseConfig;
 
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;

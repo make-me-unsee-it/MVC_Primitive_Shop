@@ -6,6 +6,7 @@ import com.step.hryshkin.service.UserService;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -22,7 +23,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void createNewUser(User user) {
-        userDAO.createNewUser(user);
+        String encodedPassword = new BCryptPasswordEncoder(4).encode(user.getPassword());
+        User newEncodedUser = new User(user.getLogin(), encodedPassword);
+        userDAO.createNewUser(newEncodedUser);
     }
 
     @Override

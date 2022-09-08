@@ -1,6 +1,6 @@
 package com.step.hryshkin.dao.impl;
 
-import com.step.hryshkin.config.ConnectCreator;
+import com.step.hryshkin.config.h2databaseConfig.ConnectCreator;
 import com.step.hryshkin.dao.OrderDAO;
 import com.step.hryshkin.model.Order;
 import org.apache.logging.log4j.LogManager;

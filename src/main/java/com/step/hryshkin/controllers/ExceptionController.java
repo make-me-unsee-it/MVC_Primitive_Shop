@@ -1,6 +1,5 @@
 package com.step.hryshkin.controllers;
 
-import com.step.hryshkin.utils.UtilsForOnlineShop;
 import org.springframework.core.Ordered;
 import org.springframework.core.annotation.Order;
 import org.springframework.http.HttpStatus;
@@ -31,5 +30,4 @@ public class ExceptionController {
     public String statusForbidden(HttpServletRequest request) {
         return "errors/403";
     }
-
 }

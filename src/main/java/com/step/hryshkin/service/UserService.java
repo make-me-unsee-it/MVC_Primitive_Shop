@@ -9,4 +9,6 @@ public interface UserService {
     void createNewUser(User user);
 
     Optional<User> getUserByName(String userName);
+
+
 }

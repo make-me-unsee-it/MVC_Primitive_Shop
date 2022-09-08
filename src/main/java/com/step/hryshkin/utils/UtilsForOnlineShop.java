@@ -28,10 +28,6 @@ public class UtilsForOnlineShop {
                 .getLogin().equals(request.getParameter("username"));
     }
 
-    public static void setCheckStatus(HttpServletRequest request, String check) {
-        request.getSession().setAttribute("check", check);
-    }
-
     public static void setGoodListForCurrentOrder(HttpServletRequest request, List<String> goodsForCurrentOrder) {
         request.getSession().setAttribute("goodListForCurrentOrder", goodsForCurrentOrder);
     }
