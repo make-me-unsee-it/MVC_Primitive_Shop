@@ -1,4 +1,4 @@
-package com.step.hryshkin.config.springConfig;
+package com.step.hryshkin.config.thymeleaf;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationContext;
@@ -20,7 +20,6 @@ import org.thymeleaf.spring5.view.ThymeleafViewResolver;
 @Configuration
 @EnableWebMvc
 @ComponentScan("com.step.hryshkin.controllers")
-@PropertySource("classpath:dataBase/dataBase.properties")
 public class SpringConfig implements WebMvcConfigurer {
 
     private final ApplicationContext applicationContext;

@@ -2,6 +2,7 @@ package com.step.hryshkin.config.springConfig;
 
 import com.step.hryshkin.config.h2databaseConfig.ContextInitializer;
 import com.step.hryshkin.config.securityConfig.SecurityConfig;
+import com.step.hryshkin.config.thymeleaf.SpringConfig;
 import org.h2.server.web.WebServlet;
 import org.springframework.web.servlet.support.AbstractAnnotationConfigDispatcherServletInitializer;
 
