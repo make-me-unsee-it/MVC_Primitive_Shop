@@ -1,27 +1,38 @@
 package com.step.hryshkin.model;
 
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 
+
+import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Objects;
 
-public class User {
+@Entity
+@Table(name = "USERS")
+public class User implements Serializable {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false, updatable = false)
     private Long id;
-    private String login;
+
+    @Column(name = "USER_NAME", nullable = false, unique = true)
+    private String userName;
+
+    @Column(name = "PASSWORD", nullable = false)
     private String password;
 
     public User(Long id, String name, String password) {
         this.id = id;
-        this.login = name;
+        this.userName = name;
         this.password = password;
     }
 
     public User(String name, String password) {
-        this.login = name;
+        this.userName = name;
         this.password = password;
     }
 
-    public User(){
+    public User() {
     }
 
     public Long getId() {
@@ -32,12 +43,12 @@ public class User {
         this.id = id;
     }
 
-    public String getLogin() {
-        return login;
+    public String getUserName() {
+        return userName;
     }
 
-    public void setLogin(String login) {
-        this.login = login;
+    public void setUserName(String userName) {
+        this.userName = userName;
     }
 
     public String getPassword() {
@@ -49,24 +60,24 @@ public class User {
     }
 
     @Override
+    public String toString() {
+        return "User{" +
+                "id=" + id +
+                ", userName='" + userName + '\'' +
+                ", password='" + password + '\'' +
+                '}';
+    }
+
+    @Override
     public boolean equals(Object o) {
         if (this == o) return true;
         if (!(o instanceof User)) return false;
         User user = (User) o;
-        return Objects.equals(id, user.id) && Objects.equals(login, user.login) && Objects.equals(password, user.password);
+        return Objects.equals(id, user.id) && Objects.equals(userName, user.userName) && Objects.equals(password, user.password);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, login, password);
-    }
-
-    @Override
-    public String toString() {
-        return "User{" +
-                "id=" + id +
-                ", login='" + login + '\'' +
-                ", password='" + password + '\'' +
-                '}';
+        return Objects.hash(id, userName, password);
     }
 }

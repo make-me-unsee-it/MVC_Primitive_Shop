@@ -1,22 +1,18 @@
 package com.step.hryshkin.dao.impl;
 
-import com.step.hryshkin.config.h2databaseConfig.ConnectCreator;
 import com.step.hryshkin.dao.OrderGoodDAO;
-import com.step.hryshkin.model.OrderGood;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import org.springframework.stereotype.Repository;
-
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.SQLException;
 
 @Repository
 public class OrderGoodDAOImpl implements OrderGoodDAO {
     private static final Logger LOGGER = LogManager.getLogger(OrderGoodDAOImpl.class);
 
     @Override
-    public void createNewOrderGoodDAO(OrderGood orderGood) {
+    public void createNewOrderGoodDAO() {
+        //TODO фундаментально переделать
+        /*
         try (Connection connection = ConnectCreator.getConnection()) {
             try (PreparedStatement statement = connection
                     .prepareStatement("INSERT INTO ORDERGOODS (ORDERID, GOODID) values (?,?)")) {
@@ -27,5 +23,7 @@ public class OrderGoodDAOImpl implements OrderGoodDAO {
         } catch (SQLException throwable) {
             LOGGER.error("SQLException at OrderGoodDAOImpl at CreateNewOrderGood" + throwable);
         }
+
+         */
     }
 }

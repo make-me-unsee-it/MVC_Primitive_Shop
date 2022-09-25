@@ -1,4 +1,4 @@
-package com.step.hryshkin.config.springConfig;
+package com.step.hryshkin.config.hibernateConfig;
 
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
@@ -11,18 +11,20 @@ import org.springframework.orm.hibernate5.HibernateTransactionManager;
 import org.springframework.orm.hibernate5.LocalSessionFactoryBean;
 import org.springframework.transaction.PlatformTransactionManager;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import javax.sql.DataSource;
-
 import java.util.Properties;
 
 import static java.nio.charset.StandardCharsets.UTF_8;
 
+@EnableWebMvc
 @Configuration
 @EnableTransactionManagement
-@PropertySource(ignoreResourceNotFound = true, value = "classpath.dataBase/hibernate.properties")
-@ComponentScan(value = {"com.step.hryshkin.service","com.step.hryshkin.dao"})
-public class RootConfig {
+@PropertySource(ignoreResourceNotFound = true, value = "classpath:dataBase/hibernate.properties")
+@ComponentScan(value = {"com.step.hryshkin"})
+public class RootConfig implements WebMvcConfigurer {
 
     public static final String MODELS_LOCATION = "com.step.hryshkin.model";
 
@@ -57,6 +59,7 @@ public class RootConfig {
         return  sessionFactory;
     }
 
+    @Bean
     public DataSource h2DataSource() {
         return new EmbeddedDatabaseBuilder()
                 .setName(dbName)
@@ -67,7 +70,11 @@ public class RootConfig {
 
     private Properties hibernateProperties() {
         final Properties hibernateProperties = new Properties();
-
+        hibernateProperties.setProperty("hibernate.hbm2ddl.auto", hbm2ddlAuto);
+        hibernateProperties.setProperty("hibernate.hbm2ddl.import_files", hbm2ddlImport);
+        hibernateProperties.setProperty("hibernate.dialect", dialect);
+        hibernateProperties.setProperty("hibernate.show_sql", showSql);
+        hibernateProperties.setProperty("hibernate.format_sql", showSql);
         return hibernateProperties;
     }
 }

@@ -1,4 +1,4 @@
-package com.step.hryshkin.service;
+package com.step.hryshkin.security.service;
 
 import org.springframework.security.core.userdetails.UserDetails;
 

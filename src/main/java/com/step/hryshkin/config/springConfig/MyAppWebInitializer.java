@@ -1,6 +1,6 @@
 package com.step.hryshkin.config.springConfig;
 
-import com.step.hryshkin.config.h2databaseConfig.ContextInitializer;
+import com.step.hryshkin.config.hibernateConfig.RootConfig;
 import com.step.hryshkin.config.securityConfig.SecurityConfig;
 import com.step.hryshkin.config.thymeleaf.SpringConfig;
 import org.h2.server.web.WebServlet;
@@ -15,14 +15,6 @@ import javax.servlet.ServletRegistration;
  */
 
 public class MyAppWebInitializer extends AbstractAnnotationConfigDispatcherServletInitializer {
-
-    @Override
-    public void onStartup(ServletContext servletContext) throws ServletException {
-        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("h2-console", new WebServlet());
-        servletRegistration.addMapping("/h2/*");
-        servletContext.addListener(ContextInitializer.class);
-        super.onStartup(servletContext);
-    }
 
     @Override
     protected void customizeRegistration(ServletRegistration.Dynamic registration) {
@@ -42,5 +34,12 @@ public class MyAppWebInitializer extends AbstractAnnotationConfigDispatcherServl
     @Override
     protected String[] getServletMappings() {
         return new String[] {"/"};
+    }
+
+    @Override
+    public void onStartup(ServletContext servletContext) throws ServletException {
+        ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("h2-console", new WebServlet());
+        servletRegistration.addMapping("/h2/*");
+        super.onStartup(servletContext);
     }
 }

@@ -1,8 +1,7 @@
 package com.step.hryshkin.controllers;
 
 import com.step.hryshkin.model.Order;
-import com.step.hryshkin.model.User;
-import com.step.hryshkin.model.security.CustomUserDetails;
+import com.step.hryshkin.security.model.CustomUserDetails;
 import com.step.hryshkin.service.OrderService;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;

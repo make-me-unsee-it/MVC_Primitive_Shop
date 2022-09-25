@@ -1,22 +1,41 @@
 package com.step.hryshkin.model;
 
+import javax.persistence.*;
+import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class Order {
+@Entity
+@Table(name = "ORDERS")
+public class Order implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "ID", nullable = false, updatable = false)
     private Long id;
-    private Long userId;
+
+    @Column(name = "TOTAL_PRICE", nullable = false)
     private BigDecimal totalPrice;
 
-    public Order(Long id, Long userId, BigDecimal totalPrice) {
-        this.id = id;
-        this.userId = userId;
-        this.totalPrice = totalPrice;
-    }
+    @Column(name = "USER_ID", nullable = false)
+    private Long userId;
 
-    public Order(Long userId, BigDecimal totalPrice) {
-        this.userId = userId;
-        this.totalPrice = totalPrice;
+    @ManyToOne(fetch = FetchType.EAGER,
+            cascade = CascadeType.ALL)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @OneToMany(
+            mappedBy = "order",
+            cascade = CascadeType.REMOVE,
+            orphanRemoval = true
+    )
+    private List<Good> goods;
+
+    public Order() {
+        this.goods = new ArrayList<>();
     }
 
     public Long getId() {
@@ -48,20 +67,20 @@ public class Order {
         if (this == o) return true;
         if (!(o instanceof Order)) return false;
         Order order = (Order) o;
-        return Objects.equals(id, order.id) && Objects.equals(userId, order.userId) && Objects.equals(totalPrice, order.totalPrice);
+        return Objects.equals(id, order.id) && Objects.equals(totalPrice, order.totalPrice) && Objects.equals(userId, order.userId);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, userId, totalPrice);
+        return Objects.hash(id, totalPrice, userId);
     }
 
     @Override
     public String toString() {
         return "Order{" +
                 "id=" + id +
-                ", userId=" + userId +
                 ", totalPrice=" + totalPrice +
+                ", userId=" + userId +
                 '}';
     }
 }

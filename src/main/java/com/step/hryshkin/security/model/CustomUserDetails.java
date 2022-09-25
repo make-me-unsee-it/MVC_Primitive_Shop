@@ -1,4 +1,4 @@
-package com.step.hryshkin.model.security;
+package com.step.hryshkin.security.model;
 
 import com.step.hryshkin.model.User;
 import org.springframework.security.core.GrantedAuthority;
@@ -28,7 +28,7 @@ public class CustomUserDetails implements UserDetails {
 
     @Override
     public String getUsername() {
-        return user.getLogin();
+        return user.getUserName();
     }
 
     @Override

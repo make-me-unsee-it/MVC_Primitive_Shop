@@ -2,8 +2,7 @@ package com.step.hryshkin.controllers;
 
 import com.step.hryshkin.model.Good;
 import com.step.hryshkin.model.Order;
-import com.step.hryshkin.model.OrderGood;
-import com.step.hryshkin.model.security.CustomUserDetails;
+import com.step.hryshkin.security.model.CustomUserDetails;
 import com.step.hryshkin.service.GoodService;
 import com.step.hryshkin.service.OrderGoodService;
 import com.step.hryshkin.service.OrderService;
@@ -67,22 +66,22 @@ public class ShopController {
                     BigDecimal currentOrderTotalPrice =
                             ((Order) request.getSession().getAttribute("order")).getTotalPrice();
                     currentOrderTotalPrice = currentOrderTotalPrice.add(currentGood.get().getPrice());
-                    Order order = new Order(currentOrderId, userId, currentOrderTotalPrice);
-                    orderService.updateOrder(order);
-                    UtilsForOnlineShop.setOrder(request, order);
-                    OrderGood orderGood = new OrderGood(currentOrderId, goodId);
-                    orderGoodService.createNewOrderGoodDAO(orderGood);
+                    //Order order = new Order(currentOrderId, userId, currentOrderTotalPrice); TODO сломано
+                    // orderService.updateOrder(order); TODO сломано
+                    //UtilsForOnlineShop.setOrder(request, order); TODO сломано
+                    //OrderGood orderGood = new OrderGood(currentOrderId, goodId); //TODO сломано
+                    orderGoodService.createNewOrderGoodDAO(); //TODO и это сломано
                 }
 
                 if (request.getSession().getAttribute("order") == null) {
-                    Order order = new Order(userId, currentGood.get().getPrice());
-                    orderService.createNewOrder(order);
+                    // Order order = new Order(userId, currentGood.get().getPrice()); //TODO сломано
+                    // orderService.createNewOrder(order); //TODO сломано
                     Optional<Order> newestOrder = orderService.getLastOrder();
                     if (newestOrder.isPresent()) {
                         UtilsForOnlineShop.setOrder(request, newestOrder.get());
                         long orderId = newestOrder.get().getId();
-                        OrderGood orderGood = new OrderGood(orderId, goodId);
-                        orderGoodService.createNewOrderGoodDAO(orderGood);
+                        //OrderGood orderGood = new OrderGood(orderId, goodId); //TODO сломано
+                        orderGoodService.createNewOrderGoodDAO(); //TODO и это сломано
                     }
                 }
             }

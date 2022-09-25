@@ -8,6 +8,7 @@ import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.Optional;
 
@@ -22,13 +23,15 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public void createNewUser(User user) {
         String encodedPassword = new BCryptPasswordEncoder(4).encode(user.getPassword());
-        User newEncodedUser = new User(user.getLogin(), encodedPassword);
+        User newEncodedUser = new User(user.getUserName(), encodedPassword);
         userDAO.createNewUser(newEncodedUser);
     }
 
     @Override
+    @Transactional
     public Optional<User> getUserByName(String userName) {
         return userDAO.getUserByName(userName);
     }

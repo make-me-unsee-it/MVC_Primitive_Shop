@@ -16,7 +16,7 @@ public class UtilsForOnlineShop {
     }
 
     public static String getUser(HttpServletRequest request) {
-        return ((User) request.getSession().getAttribute("user")).getLogin();
+        return ((User) request.getSession().getAttribute("user")).getUserName();
     }
 
     public static void setOrder(HttpServletRequest request, Order order) {
@@ -25,7 +25,7 @@ public class UtilsForOnlineShop {
 
     public static boolean isUsersEquals(HttpServletRequest request) {
         return ((User) request.getSession().getAttribute("user"))
-                .getLogin().equals(request.getParameter("username"));
+                .getUserName().equals(request.getParameter("username"));
     }
 
     public static void setGoodListForCurrentOrder(HttpServletRequest request, List<String> goodsForCurrentOrder) {

@@ -1,30 +1,25 @@
-package com.step.hryshkin.service.security;
+package com.step.hryshkin.security.service.impl;
 
 import com.step.hryshkin.dao.UserDAO;
-import com.step.hryshkin.model.User;
-import com.step.hryshkin.model.security.CustomUserDetails;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import com.step.hryshkin.security.model.CustomUserDetails;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
-import java.util.HashSet;
-import java.util.Optional;
-import java.util.Set;
-
+@Service
 public class UserDetailServiceImpl implements UserDetailsService {
 
 
     private UserDAO userDAO;
 
-    @Autowired
     private UserDetailServiceImpl(UserDAO userDAO) {
         this.userDAO = userDAO;
     }
 
     @Override
+    @Transactional
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         return userDAO.getUserByName(username)
                 .map(CustomUserDetails::new)

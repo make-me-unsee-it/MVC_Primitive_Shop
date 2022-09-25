@@ -1,7 +1,6 @@
 package com.step.hryshkin.service.impl;
 
 import com.step.hryshkin.dao.OrderGoodDAO;
-import com.step.hryshkin.model.OrderGood;
 import com.step.hryshkin.service.OrderGoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -17,7 +16,7 @@ public class OrderGoodServiceImpl implements OrderGoodService {
     }
 
     @Override
-    public void createNewOrderGoodDAO(OrderGood orderGood) {
-        orderGoodDAO.createNewOrderGoodDAO(orderGood);
+    public void createNewOrderGoodDAO() {
+        orderGoodDAO.createNewOrderGoodDAO();
     }
 }

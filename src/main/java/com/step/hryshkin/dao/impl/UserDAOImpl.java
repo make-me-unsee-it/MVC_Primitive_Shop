@@ -1,53 +1,38 @@
 package com.step.hryshkin.dao.impl;
 
-import com.step.hryshkin.config.h2databaseConfig.ConnectCreator;
 import com.step.hryshkin.dao.UserDAO;
 import com.step.hryshkin.model.User;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
 import java.util.Optional;
 
 @Repository
 public class UserDAOImpl implements UserDAO {
     private static final Logger LOGGER = LogManager.getLogger(UserDAOImpl.class);
 
+    private final SessionFactory sessionFactory;
+
+    public UserDAOImpl(SessionFactory sessionFactory) {
+        this.sessionFactory = sessionFactory;
+    }
+
+    //TODO уже исправлен! Наверное
     @Override
     public void createNewUser(User user) {
-        try (Connection connection = ConnectCreator.getConnection()) {
-            try (PreparedStatement statement = connection
-                    .prepareStatement("INSERT INTO USERS (username, password) values (?,?)")) {
-                statement.setString(1, user.getLogin());
-                statement.setString(2, user.getPassword());
-                statement.executeUpdate();
-            }
-        } catch (SQLException throwable) {
-            LOGGER.error("SQLException at UserDAOImpl at CreateNewUser" + throwable);
-        }
+        sessionFactory.getCurrentSession().save(user);
     }
 
+    //TODO уже исправлен!
     @Override
-    public Optional<User> getUserByName(String userName) {
-        Optional<User> result = Optional.empty();
-        try (Connection connection = ConnectCreator.getConnection()) {
-            try (PreparedStatement statement = connection
-                    .prepareStatement("SELECT * FROM USERS WHERE USERNAME = '" + userName + "'")) {
-                ResultSet rs = statement.executeQuery();
-                while (rs.next()) {
-                    result = Optional.of(new User(rs.getLong("ID"),
-                            rs.getString("USERNAME"),
-                            rs.getString("PASSWORD")));
-                }
-            }
-        } catch (SQLException throwable) {
-            LOGGER.error("SQLException at UserDAOImpl at getUserByName(String username)" + throwable);
-        }
-        return result;
+    public Optional<User> getUserByName(String name) {
+        Optional<User> user;
+        Session session = sessionFactory.getCurrentSession();
+        user = session.createQuery("FROM User WHERE userName =:userName", User.class)
+                .setParameter("userName", name).uniqueResultOptional();
+        return user;
     }
-
 }
