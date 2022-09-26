@@ -1,6 +1,7 @@
 package com.step.hryshkin.controllers;
 
 import com.step.hryshkin.model.User;
+import com.step.hryshkin.service.OrderService;
 import com.step.hryshkin.service.UserService;
 import com.step.hryshkin.utils.UtilsForOnlineShop;
 import org.springframework.stereotype.Controller;
@@ -18,8 +19,8 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IdentificationController {
 
-    @Inject
-    UserService userService;
+    private UserService userService;
+
 
     //TODO ВЫПИЛИТЬ
     @GetMapping("/login")

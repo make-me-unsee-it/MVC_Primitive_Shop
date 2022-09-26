@@ -4,13 +4,13 @@ import com.step.hryshkin.dao.GoodDAO;
 import com.step.hryshkin.model.Good;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import org.hibernate.HibernateException;
-import org.hibernate.Session;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
 import java.util.Optional;
+
+//TODO работает только половина методов
 
 @Repository
 public class GoodDAOImpl implements GoodDAO {
@@ -23,28 +23,28 @@ public class GoodDAOImpl implements GoodDAO {
     }
 
     @Override
-    public Optional<Good> getById(long id) {
-        Optional<Good> good = Optional.empty();
-        try (Session session = sessionFactory.openSession()) {
-            good = Optional.of(session.createQuery("FROM Good WHERE id =:id", Good.class)
-                    .setParameter("id", id)
-                    .uniqueResult());
-        } catch (HibernateException exception) {
-            LOGGER.error("HibernateException at GoodDAOImpl at getById" + exception);
+    public List<Good> getAll() {
+        Optional<List<Good>> goodList;
+        goodList = Optional.of(sessionFactory.getCurrentSession()
+                .createQuery("FROM Good").list());
+        if (goodList.isPresent()) return goodList.get();
+        else {
+            LOGGER.error("HibernateException at getAll: goodList is null");
+            return null;
         }
-        return good;
     }
 
     @Override
-    public List<Good> getAll() {
-        Optional<List<Good>> goodList = Optional.empty();
-        try (Session session = sessionFactory.openSession()) {
-            goodList = Optional.of(session.createQuery("FROM Good", Good.class).getResultList());
-        } catch (HibernateException exception) {
-            LOGGER.error("HibernateException at GoodDAOImpl at getAll" + exception);
-        }
-        return goodList.orElse(null);
+    public Optional<Good> getById(long id) {
+        Optional<Good> good;
+        good = sessionFactory.getCurrentSession()
+                .createQuery("FROM Good WHERE id =:id", Good.class)
+                .setParameter("id", id)
+                .uniqueResultOptional();
+        return good;
     }
+
+
 
     @Override
     public List<String> getGoodListByOrderId(long id) {

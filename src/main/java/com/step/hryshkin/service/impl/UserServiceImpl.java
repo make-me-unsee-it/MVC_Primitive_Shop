@@ -14,7 +14,6 @@ import java.util.Optional;
 
 @Service
 public class UserServiceImpl implements UserService {
-    private static final Logger LOGGER = LogManager.getLogger(UserServiceImpl.class);
     private final UserDAO userDAO;
 
     @Autowired

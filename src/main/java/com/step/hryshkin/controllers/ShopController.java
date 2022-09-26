@@ -25,14 +25,14 @@ import java.util.Optional;
 
 @Controller
 public class ShopController {
-    @Inject
-    GoodService goodService;
-    @Inject
-    OrderGoodService orderGoodService;
-    @Inject
-    OrderService orderService;
-    @Inject
-    UserService userService;
+
+    private GoodService goodService;
+
+    private OrderGoodService orderGoodService;
+
+    private OrderService orderService;
+
+    private UserService userService;
 
     @GetMapping("/super")
     public String deleteThisMethod(@AuthenticationPrincipal CustomUserDetails customUserDetails) {

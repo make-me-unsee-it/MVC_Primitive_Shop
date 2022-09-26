@@ -44,7 +44,6 @@ public class Good implements Serializable {
     @JoinColumn(name = "order_id")
     private Order order;
 
-
     public Long getId() {
         return id;
     }
@@ -69,16 +68,20 @@ public class Good implements Serializable {
         this.price = price;
     }
 
+    public User getUser() {
+        return user;
+    }
 
-    @Override
-    public String toString() {
-        return "Good{" +
-                "id=" + id +
-                ", title='" + title + '\'' +
-                ", price=" + price +
-                ", user=" + user +
-                ", order=" + order +
-                '}';
+    public void setUser(User user) {
+        this.user = user;
+    }
+
+    public Order getOrder() {
+        return order;
+    }
+
+    public void setOrder(Order order) {
+        this.order = order;
     }
 
     @Override
@@ -86,12 +89,14 @@ public class Good implements Serializable {
         if (this == o) return true;
         if (!(o instanceof Good)) return false;
         Good good = (Good) o;
-        return Objects.equals(id, good.id) && Objects.equals(title, good.title) && Objects.equals(price, good.price) && Objects.equals(user, good.user) && Objects.equals(order, good.order);
+        return Objects.equals(id, good.id) &&
+                Objects.equals(title, good.title) &&
+                Objects.equals(price, good.price);
     }
 
     @Override
     public int hashCode() {
-        return Objects.hash(id, title, price, user, order);
+        return Objects.hash(id, title, price);
     }
 }
 

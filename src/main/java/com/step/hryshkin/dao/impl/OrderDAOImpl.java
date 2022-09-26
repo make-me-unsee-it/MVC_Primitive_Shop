@@ -23,11 +23,15 @@ public class OrderDAOImpl implements OrderDAO {
         this.sessionFactory = sessionFactory;
     }
 
+
+    //TODO работает
     @Override
     public void createNewOrder(Order order) {
         sessionFactory.getCurrentSession().save(order);
     }
 
+
+    //TODO нет в примере
     @Override
     public Optional<Order> getLastOrder() {
         Optional<Order> order = Optional.empty();
@@ -40,6 +44,7 @@ public class OrderDAOImpl implements OrderDAO {
         return order;
     }
 
+    //TODO нет в примере
     @Override
     public void updateOrder(Order order) {
         Transaction transaction = null;
