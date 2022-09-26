@@ -4,6 +4,8 @@ package com.step.hryshkin.model;
 
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 @Entity
@@ -21,6 +23,22 @@ public class User implements Serializable {
     @Column(name = "PASSWORD", nullable = false)
     private String password;
 
+    @OneToMany(
+            mappedBy = "user",
+            cascade = CascadeType.ALL,
+            orphanRemoval = true
+    )
+    private List<Order> orders = new ArrayList<>();
+
+    public User() {
+    }
+
+    //TODO это только что добавил
+    public void addOrder(Order order) {
+        this.orders.add(order);
+        order.setUser(this);
+    }
+
     public User(Long id, String name, String password) {
         this.id = id;
         this.userName = name;
@@ -30,9 +48,6 @@ public class User implements Serializable {
     public User(String name, String password) {
         this.userName = name;
         this.password = password;
-    }
-
-    public User() {
     }
 
     public Long getId() {

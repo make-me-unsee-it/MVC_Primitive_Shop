@@ -19,6 +19,7 @@ import javax.servlet.http.HttpServletRequest;
 @Controller
 public class IdentificationController {
 
+    @Inject
     private UserService userService;
 
 

@@ -5,6 +5,8 @@ import com.step.hryshkin.model.Good;
 import com.step.hryshkin.service.GoodService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Isolation;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.util.List;
 import java.util.Optional;
@@ -20,16 +22,19 @@ public class GoodServiceImpl implements GoodService {
     }
 
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public List<String> getGoodListByOrderId(long id) {
         return goodDAO.getGoodListByOrderId(id);
     }
 
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public List<Good> getAll() {
         return goodDAO.getAll();
     }
 
     @Override
+    @Transactional(isolation = Isolation.SERIALIZABLE)
     public Optional<Good> getById(long id) {
         return goodDAO.getById(id);
     }

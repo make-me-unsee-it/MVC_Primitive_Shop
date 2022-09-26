@@ -18,7 +18,7 @@ import javax.servlet.http.HttpServletRequest;
 
 @Controller
 public class BasketController {
-
+    @Inject
     private OrderService orderService;
 
     @GetMapping("/basket")

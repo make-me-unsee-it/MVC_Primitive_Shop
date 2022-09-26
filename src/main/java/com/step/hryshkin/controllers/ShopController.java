@@ -25,13 +25,13 @@ import java.util.Optional;
 
 @Controller
 public class ShopController {
-
+    @Inject
     private GoodService goodService;
-
+    @Inject
     private OrderGoodService orderGoodService;
-
+    @Inject
     private OrderService orderService;
-
+    @Inject
     private UserService userService;
 
     @GetMapping("/super")
