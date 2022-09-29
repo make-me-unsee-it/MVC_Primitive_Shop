@@ -8,8 +8,6 @@ import org.springframework.stereotype.Repository;
 
 import java.util.Optional;
 
-//TODO тут все ОК. Ставлю ридонли
-
 @Repository
 public class UserDAOImpl implements UserDAO {
 

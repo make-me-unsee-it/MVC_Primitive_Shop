@@ -19,17 +19,19 @@ public class Order implements Serializable {
     @Column(name = "TOTAL_PRICE", nullable = false)
     private BigDecimal totalPrice;
 
-@ManyToOne(fetch = FetchType.EAGER,
-        cascade = CascadeType.ALL)
-@JoinColumn(name = "USER_ID")
-private User user;
+    @ManyToOne(fetch = FetchType.EAGER)
+    private User user;
 
-    @OneToMany(
-            mappedBy = "order",
-            cascade = CascadeType.REMOVE,
-            orphanRemoval = true
+
+    @ManyToMany(fetch = FetchType.EAGER,
+            cascade = {CascadeType.PERSIST,
+                    CascadeType.MERGE})
+    @JoinTable(
+            name = "ORDERS_GOODS",
+            joinColumns = @JoinColumn(name = "ORDER_ID"),
+            inverseJoinColumns = @JoinColumn(name = "GOOD_ID")
     )
-    private List<Good> goods;
+    private List<Good> goods = new ArrayList<>();
 
     public Order() {
     }

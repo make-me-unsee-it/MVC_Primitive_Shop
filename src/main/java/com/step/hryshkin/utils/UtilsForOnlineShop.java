@@ -1,8 +1,6 @@
 package com.step.hryshkin.utils;
 
-import com.step.hryshkin.model.Good;
 import com.step.hryshkin.model.Order;
-import com.step.hryshkin.model.User;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
@@ -16,7 +14,7 @@ public class UtilsForOnlineShop {
         request.getSession().setAttribute("order", order);
     }
 
-    public static Order getOrder (HttpServletRequest request) {
+    public static Order getOrder(HttpServletRequest request) {
         return ((Order) request.getSession().getAttribute("order"));
     }
 

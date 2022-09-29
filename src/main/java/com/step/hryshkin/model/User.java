@@ -1,7 +1,5 @@
 package com.step.hryshkin.model;
 
-
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -43,13 +41,6 @@ public class User implements Serializable {
         this.userName = name;
         this.password = password;
     }
-
-    //TODO это только что добавил
-    public void addOrder(Order order) {
-        this.orders.add(order);
-        order.setUser(this);
-    }
-
 
     public Long getId() {
         return id;

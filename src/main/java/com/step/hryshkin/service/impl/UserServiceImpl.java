@@ -3,8 +3,6 @@ package com.step.hryshkin.service.impl;
 import com.step.hryshkin.dao.UserDAO;
 import com.step.hryshkin.model.User;
 import com.step.hryshkin.service.UserService;
-import org.apache.logging.log4j.LogManager;
-import org.apache.logging.log4j.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;

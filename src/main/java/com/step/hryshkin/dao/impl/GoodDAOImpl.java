@@ -7,11 +7,8 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-
-//TODO работает только половина методов
 
 @Repository
 public class GoodDAOImpl implements GoodDAO {
@@ -23,7 +20,6 @@ public class GoodDAOImpl implements GoodDAO {
         this.sessionFactory = sessionFactory;
     }
 
-    //TODO он ругается, но работает нормально
     @Override
     public List<Good> getAll() {
         Optional<List<Good>> goodList;

@@ -36,6 +36,8 @@ public class MyAppWebInitializer extends AbstractAnnotationConfigDispatcherServl
         return new String[] {"/"};
     }
 
+
+    //don't touch!
     @Override
     public void onStartup(ServletContext servletContext) throws ServletException {
         ServletRegistration.Dynamic servletRegistration = servletContext.addServlet("h2-console", new WebServlet());

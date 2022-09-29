@@ -5,7 +5,6 @@ import com.step.hryshkin.model.Order;
 import com.step.hryshkin.model.User;
 import com.step.hryshkin.security.model.CustomUserDetails;
 import com.step.hryshkin.service.GoodService;
-import com.step.hryshkin.service.OrderService;
 import com.step.hryshkin.service.UserService;
 import com.step.hryshkin.utils.UtilsForOnlineShop;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
@@ -16,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import javax.inject.Inject;
 import javax.servlet.ServletRequest;
 import javax.servlet.http.HttpServletRequest;
-import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -38,7 +36,6 @@ public class ShopController {
                             Model model, ServletRequest servletRequest) {
         HttpServletRequest request = (HttpServletRequest) servletRequest;
         checkForNewOrder((HttpServletRequest) servletRequest, customUserDetails.getUsername());
-
         model.addAttribute("user", customUserDetails.getUsername());
         model.addAttribute("goods", goodService.getAll());
         if (request.getSession().getAttribute("goodListForCurrentOrder") != null) {
