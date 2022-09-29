@@ -7,6 +7,7 @@ import org.apache.logging.log4j.Logger;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -22,6 +23,7 @@ public class GoodDAOImpl implements GoodDAO {
         this.sessionFactory = sessionFactory;
     }
 
+    //TODO он ругается, но работает нормально
     @Override
     public List<Good> getAll() {
         Optional<List<Good>> goodList;
@@ -42,40 +44,6 @@ public class GoodDAOImpl implements GoodDAO {
                 .setParameter("id", id)
                 .uniqueResultOptional();
         return good;
-    }
-
-
-
-    @Override
-    public List<String> getGoodListByOrderId(long id) {
-        //TODO это пока что не работает
-        /*
-        Optional<List<OrderGood>> goodsInBasket = Optional.empty();
-        try (Session session = sessionFactory.openSession()) {
-            goodsInBasket = Optional.of(session.createQuery("FROM OrderGood WHERE orderId =:orderId", OrderGood.class)
-                    .setParameter("orderId", id).getResultList());
-        } catch (HibernateException exception) {
-            LOGGER.error("HibernateException at GoodDAOImpl at getGoodListByOrderId" + exception);
-        }
-        List<String> result = new ArrayList<>();
-        if (goodsInBasket.isPresent()) {
-            for (OrderGood orderGood: goodsInBasket.get()) {
-                Optional<Good> good = Optional.empty();
-                Long goodId = orderGood.getGoodId();
-                try (Session session = sessionFactory.openSession()) {
-                    good = Optional.of(session.createQuery("FROM Good WHERE id =:id", Good.class)
-                            .setParameter("id", goodId)
-                            .uniqueResult());
-                } catch (HibernateException exception) {
-                    LOGGER.error("HibernateException at GoodDAOImpl at getGoodListByOrderId (inner)" + exception);
-                }
-                good.ifPresent(value -> result.add(value.getTitle() + " " + value.getPrice()));
-            }
-        }
-
-         */
-        List<String> re = null;
-        return re;
     }
 }
 

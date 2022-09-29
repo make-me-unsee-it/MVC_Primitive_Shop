@@ -6,11 +6,5 @@ import java.util.Optional;
 
 public interface OrderService {
 
-    String printTotalPriceForOrder(long id);
-
     void createNewOrder(Order order);
-
-    Optional<Order> getLastOrder();
-
-    void updateOrder(Order order);
 }

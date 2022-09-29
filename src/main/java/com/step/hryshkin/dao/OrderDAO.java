@@ -9,9 +9,9 @@ public interface OrderDAO {
 
     void createNewOrder(Order order);
 
+    /*TODO ВЫПИЛИТЬ. УЖЕ НЕ ИСПОЛЬЗУЕТСЯ
     void updateOrder(Order order);
-
     BigDecimal getTotalPriceByOrderId(long id);
-
     Optional<Order> getLastOrder();
+     */
 }

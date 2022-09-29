@@ -19,10 +19,10 @@ public class Order implements Serializable {
     @Column(name = "TOTAL_PRICE", nullable = false)
     private BigDecimal totalPrice;
 
-    @ManyToOne(fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL)
-    @JoinColumn(name = "USER_ID")
-    private User user;
+@ManyToOne(fetch = FetchType.EAGER,
+        cascade = CascadeType.ALL)
+@JoinColumn(name = "USER_ID")
+private User user;
 
     @OneToMany(
             mappedBy = "order",
@@ -32,7 +32,30 @@ public class Order implements Serializable {
     private List<Good> goods;
 
     public Order() {
+    }
+
+    public Order(User user, BigDecimal totalPrice, List<Good> goods) {
+        this.totalPrice = totalPrice;
+        this.user = user;
+        this.goods = goods;
+    }
+
+    public Order(User user, BigDecimal totalPrice) {
+        this.user = user;
+        this.totalPrice = totalPrice;
         this.goods = new ArrayList<>();
+    }
+
+    public Order(Long id, BigDecimal totalPrice, User user, List<Good> goods) {
+        this.id = id;
+        this.totalPrice = totalPrice;
+        this.user = user;
+        this.goods = goods;
+    }
+
+    public void addGood(Good good) {
+        if (this.goods == null) this.goods = new ArrayList<>();
+        this.goods.add(good);
     }
 
     public Long getId() {
@@ -59,6 +82,14 @@ public class Order implements Serializable {
         this.user = user;
     }
 
+    public List<Good> getGoods() {
+        return goods;
+    }
+
+    public void setGoods(List<Good> goods) {
+        this.goods = goods;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -80,6 +111,7 @@ public class Order implements Serializable {
                 "id=" + id +
                 ", totalPrice=" + totalPrice +
                 ", user=" + user +
+                ", goods=" + goods +
                 '}';
     }
 }

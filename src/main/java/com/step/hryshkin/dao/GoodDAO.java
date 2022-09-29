@@ -7,8 +7,6 @@ import java.util.Optional;
 
 public interface GoodDAO {
 
-    List<String> getGoodListByOrderId(long id);
-
     Optional<Good> getById(long id);
 
     List<Good> getAll();

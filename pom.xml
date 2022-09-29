@@ -173,8 +173,6 @@
         </dependency>
     </dependencies>
 
-    <!-- LOMBOK ??? -->
-
     <!-- BUILD - MAVEN WEBAPP STANDARD -->
     <build>
         <finalName>MVCPrimitiveShop</finalName>

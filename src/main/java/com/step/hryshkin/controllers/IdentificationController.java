@@ -31,12 +31,12 @@ public class IdentificationController {
     }
 
     @GetMapping()
-    public String indexPage() {
+    public String indexPage(HttpServletRequest request) {
         return "redirect:/homepage";
     }
 
     @GetMapping("/homepage")
-    public String homePage() {
+    public String homePage(HttpServletRequest request) {
         return "identification/homepage";
     }
 

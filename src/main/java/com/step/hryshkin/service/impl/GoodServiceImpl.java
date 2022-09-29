@@ -23,12 +23,6 @@ public class GoodServiceImpl implements GoodService {
 
     @Override
     @Transactional(isolation = Isolation.SERIALIZABLE)
-    public List<String> getGoodListByOrderId(long id) {
-        return goodDAO.getGoodListByOrderId(id);
-    }
-
-    @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE)
     public List<Good> getAll() {
         return goodDAO.getAll();
     }
@@ -38,5 +32,4 @@ public class GoodServiceImpl implements GoodService {
     public Optional<Good> getById(long id) {
         return goodDAO.getById(id);
     }
-
 }

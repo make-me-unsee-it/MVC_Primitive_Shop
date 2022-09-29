@@ -6,7 +6,6 @@ import java.util.List;
 import java.util.Optional;
 
 public interface GoodService {
-    List<String> getGoodListByOrderId(long id);
 
     List<Good> getAll();
 

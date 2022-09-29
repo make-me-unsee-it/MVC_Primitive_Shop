@@ -20,27 +20,11 @@ public class OrderServiceImpl implements OrderService {
         this.orderDAO = orderDAO;
     }
 
-    @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    public String printTotalPriceForOrder(long id) {
-        return orderDAO.getTotalPriceByOrderId(id).toString();
-    }
 
+    //НУЖЕН. НО ПЕРЕДЕЛАТЬ
     @Override
     @Transactional(isolation = Isolation.SERIALIZABLE)
     public void createNewOrder(Order order) {
         orderDAO.createNewOrder(order);
-    }
-
-    @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    public Optional<Order> getLastOrder() {
-        return orderDAO.getLastOrder();
-    }
-
-    @Override
-    @Transactional(isolation = Isolation.SERIALIZABLE)
-    public void updateOrder(Order order) {
-        orderDAO.updateOrder(order);
     }
 }

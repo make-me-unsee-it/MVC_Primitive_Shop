@@ -33,12 +33,6 @@ public class User implements Serializable {
     public User() {
     }
 
-    //TODO это только что добавил
-    public void addOrder(Order order) {
-        this.orders.add(order);
-        order.setUser(this);
-    }
-
     public User(Long id, String name, String password) {
         this.id = id;
         this.userName = name;
@@ -49,6 +43,13 @@ public class User implements Serializable {
         this.userName = name;
         this.password = password;
     }
+
+    //TODO это только что добавил
+    public void addOrder(Order order) {
+        this.orders.add(order);
+        order.setUser(this);
+    }
+
 
     public Long getId() {
         return id;

@@ -10,7 +10,7 @@
 
 **START PAGE:** http://localhost:8080/
 
-**TEST USER ACCOUNT LOGIN/PASSWORD:** VVV/123
+**TEST USER ACCOUNT LOGIN/PASSWORD:** Michail/qwerty
 
 **H2 CONSOLE:**
 URL: http://localhost:8080/h2;

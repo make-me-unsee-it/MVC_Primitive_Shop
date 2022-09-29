@@ -30,8 +30,7 @@ public class OrderDAOImpl implements OrderDAO {
         sessionFactory.getCurrentSession().save(order);
     }
 
-
-    //TODO нет в примере
+/* TODO Не используется. ВЫПИЛИТЬ!
     @Override
     public Optional<Order> getLastOrder() {
         Optional<Order> order = Optional.empty();
@@ -43,8 +42,6 @@ public class OrderDAOImpl implements OrderDAO {
         }
         return order;
     }
-
-    //TODO нет в примере
     @Override
     public void updateOrder(Order order) {
         Transaction transaction = null;
@@ -59,7 +56,6 @@ public class OrderDAOImpl implements OrderDAO {
             }
         }
     }
-
     @Override
     public BigDecimal getTotalPriceByOrderId(long id) {
         BigDecimal totalPrice = new BigDecimal("0");
@@ -72,7 +68,8 @@ public class OrderDAOImpl implements OrderDAO {
             LOGGER.error("HibernateException at OrderDAOImpl at getTotalPriceByOrderId" + exception);
         }
         return totalPrice;
-    }
+    } */
+
 }
 
 
